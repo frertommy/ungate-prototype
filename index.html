@@ -99,6 +99,18 @@
   .lbrow .lp{font-family:var(--mono);color:var(--acc);width:78px;text-align:right}
   .lbrow.you{background:var(--acc-soft);margin:0 -20px;padding:11px 20px;border-radius:10px}
   .lbrow.you .nm{color:#fff}
+  /* data vault connectors */
+  .conn{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:13px 14px}
+  .conn:hover{border-color:var(--border-hi)}
+  .conn .ic{width:34px;height:34px;border-radius:9px;background:var(--soft);border:1px solid var(--border-hi);display:grid;place-items:center;font-size:12.5px;font-weight:700;font-family:var(--mono);color:#c6c5ca;flex:none}
+  .conn .meta{flex:1;min-width:0}
+  .conn .nm{font-size:13.5px;font-weight:600}
+  .conn .ds{font-size:11.5px;color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .conn .rw{font-family:var(--mono);font-size:10.5px;color:var(--acc);margin-top:3px}
+  .tog{width:40px;height:23px;border-radius:30px;background:#23252a;border:1px solid var(--border-hi);position:relative;cursor:pointer;flex:none;transition:.18s}
+  .tog.on{background:var(--acc);border-color:var(--acc)}
+  .tog::after{content:"";position:absolute;top:2px;left:2px;width:17px;height:17px;border-radius:50%;background:#fff;transition:.18s}
+  .tog.on::after{left:19px}
 
   /* HERO — restrained, editorial */
   .hero{text-align:center;padding:96px 0 18px}
@@ -358,6 +370,25 @@
       <div class="lbrow"><span class="rk">3</span><span class="nm">vibe_coder</span><span class="tg">Platinum</span><span class="lp">61,002</span></div>
       <div class="lbrow you"><span class="rk">142</span><span class="nm">tommy_9862 (you)</span><span class="tg">Gold</span><span class="lp">8,420</span></div>
     </div>
+    <h3>Your data vault <span class="mono muted" style="font-size:12px;font-weight:400">· connect, control, earn</span></h3>
+    <div class="card" style="margin-bottom:14px">
+      <div class="mono muted" style="font-size:11px;margin-bottom:11px">WHAT ARE YOU WORKING ON THIS WEEK? — one tap, +50 pts each</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px" data-grp="status">
+        <div class="chip sel">Building a SaaS</div><div class="chip">Trading</div><div class="chip">Writing</div><div class="chip">Research</div><div class="chip">Job-hunting</div><div class="chip">Designing</div><div class="chip">Studying</div>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="conn"><div class="ic">GH</div><div class="meta"><div class="nm">GitHub</div><div class="ds">Repos, stack, what you're building</div><div class="rw">+400 pts · ~$4/mo</div></div><button class="ckbtn go">Connect</button></div>
+      <div class="conn"><div class="ic">✦</div><div class="meta"><div class="nm">AI usage</div><div class="ds">Topics you ask AI — tagged on-device</div><div class="rw">~$6/mo</div></div><div class="tog on"></div></div>
+      <div class="conn"><div class="ic">G</div><div class="meta"><div class="nm">Google</div><div class="ds">Calendar &amp; active projects</div><div class="rw">+300 pts · ~$3/mo</div></div><button class="ckbtn go">Connect</button></div>
+      <div class="conn"><div class="ic">▦</div><div class="meta"><div class="nm">Linear · Notion · Jira</div><div class="ds">Your task list — what you're working on</div><div class="rw">+350 pts</div></div><button class="ckbtn go">Connect</button></div>
+      <div class="conn"><div class="ic">◎</div><div class="meta"><div class="nm">Wallet</div><div class="ds">On-chain activity &amp; holdings</div><div class="rw">+250 pts</div></div><button class="ckbtn">Connected</button></div>
+      <div class="conn"><div class="ic">in</div><div class="meta"><div class="nm">LinkedIn</div><div class="ds">Role, company, seniority</div><div class="rw">+200 pts</div></div><button class="ckbtn go">Connect</button></div>
+      <div class="conn"><div class="ic">𝕏</div><div class="meta"><div class="nm">X</div><div class="ds">Interests &amp; topics you follow</div><div class="rw">+150 pts</div></div><button class="ckbtn">Connected</button></div>
+      <div class="conn"><div class="ic">▶</div><div class="meta"><div class="nm">In-chat one-tap</div><div class="ds">Confirm what you're working on, in the moment</div><div class="rw">live in the extension</div></div><button class="ckbtn">On</button></div>
+    </div>
+    <p class="mono muted" style="font-size:11px;margin-top:12px">🔒 Consented · on-device where possible · aggregate-only. You own it, you keep a cut, and you can revoke any source anytime.</p>
+
     <h3>Connected devices</h3>
     <div class="card" style="padding:6px 20px 16px">
       <div class="ck done"><div class="dot">✓</div><span class="cklbl">Chrome · macOS</span><span class="pts">active now</span><button class="ckbtn">Manage</button></div>
@@ -424,6 +455,7 @@
   document.getElementById('sendCode').addEventListener('click',()=>document.getElementById('otp').style.display='block');
   document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{if(c.parentElement.dataset.grp==='tier')[...c.parentElement.children].forEach(x=>x.classList.remove('sel'));c.classList.toggle('sel');}));
   const cText=document.getElementById('cText'),cPrev=document.getElementById('cPrev');if(cText)cText.addEventListener('input',()=>cPrev.textContent=cText.value);
+  document.querySelectorAll('.tog').forEach(t=>t.addEventListener('click',()=>t.classList.toggle('on')));
   // live earnings ticker
   let bal=12.4710;setInterval(()=>{bal+=Math.random()*0.0009;const t=document.getElementById('ticker');if(t)t.textContent='$'+bal.toFixed(4);},140);
   // overlay demo loops
