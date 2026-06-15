@@ -7,244 +7,226 @@
 <title>Ungate — get paid for the attention you give AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#09090b; --bg2:#0e0e11; --card:#141418; --card2:#1a1a20; --border:#26262e;
-    --text:#f3f1ee; --muted:#a09da6; --muted2:#6a6873;
-    --acid:#5ef2a0; --violet:#8b7bff; --grad:linear-gradient(120deg,var(--acid),var(--violet));
-    --disp:'Space Grotesk',sans-serif; --body:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+    --bg:#08090a; --soft:#0c0d0f; --card:#0f1013; --hi:#14161a; --border:#1c1e22; --border-hi:#2a2d33;
+    --text:#f4f3f1; --muted:#9b9aa1; --muted2:#63636b;
+    --acc:#4ade80; --acc2:#34d399; --acc-soft:rgba(74,222,128,.1);
+    --disp:'Space Grotesk',sans-serif; --serif:'Instrument Serif',serif; --body:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
   }
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--body);-webkit-font-smoothing:antialiased}
-  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:99;opacity:.03;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  body{margin:0;color:var(--text);font-family:var(--body);-webkit-font-smoothing:antialiased;
+    background:radial-gradient(900px 460px at 50% -8%,rgba(74,222,128,.06),transparent 70%),var(--bg)}
   a{color:inherit;text-decoration:none}
+  ::selection{background:rgba(74,222,128,.25)}
 
-  .mark{width:28px;height:28px;flex:none;border-radius:8px;background:var(--grad);display:grid;place-items:center}
+  .mark{width:28px;height:28px;flex:none;border-radius:8px;background:linear-gradient(140deg,var(--acc),var(--acc2));display:grid;place-items:center}
   .mark svg{width:17px;height:17px}
-  .word{font-family:var(--disp);font-weight:700;font-size:18px;letter-spacing:-.02em}
+  .word{font-family:var(--disp);font-weight:600;font-size:18px;letter-spacing:-.03em}
 
-  /* top nav */
-  .nav{position:sticky;top:0;z-index:50;background:rgba(9,9,11,.72);backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--border)}
-  .nav-in{max-width:1140px;margin:0 auto;padding:0 28px;height:64px;display:flex;align-items:center;gap:14px}
-  .brand{display:flex;align-items:center;gap:10px;cursor:pointer;margin-right:18px}
-  .links{display:flex;align-items:center;gap:4px;flex:1}
-  .links>a,.drop>.dt{display:inline-flex;align-items:center;gap:5px;padding:9px 13px;font-size:13.5px;color:#c8c5cd;
-    cursor:pointer;border-radius:9px;transition:.15s}
-  .links>a:hover,.drop:hover .dt{background:#16161b;color:#fff}
+  /* nav */
+  .nav{position:sticky;top:0;z-index:50;background:rgba(8,9,10,.7);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+  .nav-in{max-width:1160px;margin:0 auto;padding:0 30px;height:62px;display:flex;align-items:center;gap:14px}
+  .brand{display:flex;align-items:center;gap:10px;cursor:pointer;margin-right:20px}
+  .links{display:flex;align-items:center;gap:2px;flex:1}
+  .links>a,.drop>.dt{display:inline-flex;align-items:center;gap:5px;padding:8px 12px;font-size:13.5px;color:#c6c5ca;cursor:pointer;border-radius:8px;transition:.15s}
+  .links>a:hover,.drop:hover .dt{background:#141519;color:#fff}
   .drop{position:relative}
-  .drop .menu{position:absolute;top:calc(100% + 6px);left:0;min-width:210px;background:#121216;border:1px solid var(--border);
-    border-radius:12px;padding:7px;opacity:0;visibility:hidden;transform:translateY(6px);transition:.16s;box-shadow:0 16px 40px rgba(0,0,0,.5)}
+  .drop .menu{position:absolute;top:calc(100% + 6px);left:0;min-width:212px;background:#0f1014;border:1px solid var(--border-hi);border-radius:12px;padding:7px;opacity:0;visibility:hidden;transform:translateY(6px);transition:.16s;box-shadow:0 18px 44px rgba(0,0,0,.55)}
   .drop:hover .menu{opacity:1;visibility:visible;transform:none}
-  .drop .menu a{display:flex;align-items:center;gap:9px;padding:9px 11px;font-size:13px;color:#c8c5cd;border-radius:8px;cursor:pointer}
-  .drop .menu a:hover{background:#1c1c22;color:#fff}
-  .drop .menu a .mi{width:5px;height:5px;border-radius:50%;background:var(--acid);opacity:.6}
-  .navcta{display:flex;align-items:center;gap:10px}
-  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--acid);color:#07210f;border:none;border-radius:10px;
-    padding:10px 18px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:var(--body);transition:.15s}
-  .btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(94,242,160,.25)}
-  .btn.ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
-  .btn.ghost:hover{background:var(--card2);box-shadow:none}
+  .drop .menu a{display:flex;align-items:center;gap:9px;padding:9px 11px;font-size:13px;color:#c6c5ca;border-radius:8px;cursor:pointer}
+  .drop .menu a:hover{background:#1a1b20;color:#fff}
+  .drop .menu a .mi{width:5px;height:5px;border-radius:50%;background:var(--acc);opacity:.55}
+  .navcta{display:flex;align-items:center;gap:12px}
+  .signin{font-size:13.5px;color:#c6c5ca;cursor:pointer}.signin:hover{color:#fff}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--acc);color:#06230f;border:none;border-radius:9px;padding:10px 17px;font-size:13.5px;font-weight:600;cursor:pointer;font-family:var(--body);transition:.16s}
+  .btn:hover{background:#5ce68d;transform:translateY(-1px)}
+  .btn.ghost{background:transparent;border:1px solid var(--border-hi);color:var(--text)}
+  .btn.ghost:hover{background:var(--hi);transform:none}
   .btn.sm{padding:7px 13px;font-size:12px}
-  .signin{font-size:13.5px;color:#c8c5cd;cursor:pointer;padding:9px 6px}
-  .signin:hover{color:#fff}
 
-  /* pages */
-  .page{display:none}
-  .page.active{display:block;animation:fade .35s cubic-bezier(.2,.7,.2,1)}
-  @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-  .container{max-width:1140px;margin:0 auto;padding:0 28px}
+  .page{display:none}.page.active{display:block;animation:fade .4s cubic-bezier(.2,.7,.2,1)}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .container{max-width:1160px;margin:0 auto;padding:0 30px}
   .app{max-width:980px}
-  section{padding:0}
   h1{font-family:var(--disp);font-size:30px;margin:0 0 8px;letter-spacing:-.03em;font-weight:600}
-  h2{font-family:var(--disp);font-size:26px;margin:0 0 12px;letter-spacing:-.025em;font-weight:600;text-align:center}
-  h3{font-family:var(--disp);font-size:16px;margin:30px 0 12px;letter-spacing:-.02em;font-weight:600}
-  .sub{color:var(--muted);font-size:14.5px;margin:0 0 26px;line-height:1.55;max-width:620px}
-  .tag{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;color:var(--acid);
-    background:rgba(94,242,160,.08);border:1px solid rgba(94,242,160,.22);border-radius:30px;padding:5px 13px;margin-bottom:22px}
-  .tag .pulse{width:6px;height:6px;border-radius:50%;background:var(--acid);box-shadow:0 0 10px var(--acid);animation:p 1.6s infinite}
-  @keyframes p{0%,100%{opacity:1}50%{opacity:.3}}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px}
-  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-  .muted{color:var(--muted)} .mono{font-family:var(--mono)}
-  .big{font-family:var(--disp);font-size:38px;font-weight:600;letter-spacing:-.03em}
-  .usdc{font-size:13px;color:var(--muted);font-weight:500;font-family:var(--mono)}
-  .grad-txt{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  h3{font-family:var(--disp);font-size:15px;margin:28px 0 12px;letter-spacing:-.02em;font-weight:600}
+  .sub{color:var(--muted);font-size:14.5px;margin:0 0 24px;line-height:1.55;max-width:600px}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--muted);
+    border:1px solid var(--border);border-radius:30px;padding:5px 13px;background:var(--soft)}
+  .eyebrow .pulse{width:6px;height:6px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc);animation:p 1.8s infinite}
+  @keyframes p{0%,100%{opacity:1}50%{opacity:.25}}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .muted{color:var(--muted)}.mono{font-family:var(--mono)}
+  .big{font-family:var(--disp);font-size:34px;font-weight:600;letter-spacing:-.03em}
+  .usdc{font-size:12px;color:var(--muted);font-weight:500;font-family:var(--mono)}
+  .acc{color:var(--acc)}
   .row{display:flex;align-items:center;justify-content:space-between;gap:12px}
-  input,select,textarea{background:#0b0b0e;border:1px solid var(--border);border-radius:10px;color:var(--text);padding:11px 13px;font-size:13.5px;width:100%;font-family:var(--body)}
-  input:focus{outline:none;border-color:var(--acid)}
-  label{font-size:11.5px;color:var(--muted);display:block;margin:15px 0 6px;font-family:var(--mono);letter-spacing:.02em}
+  input{background:#0a0b0d;border:1px solid var(--border-hi);border-radius:10px;color:var(--text);padding:11px 13px;font-size:13.5px;width:100%;font-family:var(--body)}
+  input:focus{outline:none;border-color:var(--acc)}
+  label{font-size:11px;color:var(--muted);display:block;margin:15px 0 6px;font-family:var(--mono);letter-spacing:.03em}
   table{width:100%;border-collapse:collapse;font-size:13px}
   th{text-align:left;color:var(--muted2);font-weight:500;font-size:10.5px;letter-spacing:.06em;font-family:var(--mono);text-transform:uppercase;padding:0 10px 12px;border-bottom:1px solid var(--border)}
-  td{padding:14px 10px;border-bottom:1px solid #1d1d23}
+  td{padding:14px 10px;border-bottom:1px solid #17191d}
   .pill{font-size:11px;padding:3px 10px;border-radius:30px;font-weight:500;font-family:var(--mono)}
-  .pill.on{background:rgba(94,242,160,.13);color:var(--acid)} .pill.off{background:rgba(140,140,150,.13);color:var(--muted)}
-  .chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;border:1px solid var(--border);border-radius:30px;padding:6px 12px;cursor:pointer;color:#bdbac3;transition:.15s}
-  .chip.sel{background:rgba(94,242,160,.13);border-color:rgba(94,242,160,.4);color:var(--acid)}
-  .ck{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #1d1d23;font-size:13.5px}
-  .ck .dot{width:21px;height:21px;border-radius:50%;border:2px solid var(--border);flex:none;display:grid;place-items:center;font-size:11px}
-  .ck.done .dot{background:var(--acid);border-color:var(--acid);color:#07210f}
+  .pill.on{background:var(--acc-soft);color:var(--acc)}.pill.off{background:rgba(140,140,150,.12);color:var(--muted)}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;border:1px solid var(--border-hi);border-radius:30px;padding:6px 12px;cursor:pointer;color:#bdbcc3;transition:.15s}
+  .chip.sel{background:var(--acc-soft);border-color:rgba(74,222,128,.4);color:var(--acc)}
+  .ck{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #17191d;font-size:13.5px}
+  .ck .dot{width:21px;height:21px;border-radius:50%;border:2px solid var(--border-hi);flex:none;display:grid;place-items:center;font-size:11px}
+  .ck.done .dot{background:var(--acc);border-color:var(--acc);color:#06230f}
   .ck .pts{margin-left:auto;font-size:12px;color:var(--muted);font-family:var(--mono)}
 
-  /* hero */
-  .hero{position:relative;text-align:center;padding:88px 0 60px;overflow:hidden}
-  .hero .glow{position:absolute;border-radius:50%;filter:blur(95px);opacity:.5;z-index:0}
-  .glow.a{width:460px;height:460px;background:rgba(94,242,160,.4);top:-130px;left:6%}
-  .glow.b{width:420px;height:420px;background:rgba(139,123,255,.38);top:-80px;right:4%}
-  .hero>*{position:relative;z-index:1}
-  .hero h1{font-size:60px;line-height:1.02;max-width:780px;margin:0 auto 20px;font-weight:600;letter-spacing:-.04em}
-  .hero .sub{max-width:560px;margin:0 auto 30px;font-size:17px;text-align:center}
-  .cta{display:flex;gap:12px;justify-content:center}
+  /* HERO — restrained, editorial */
+  .hero{text-align:center;padding:96px 0 18px}
+  .hero h1{font-family:var(--disp);font-size:62px;line-height:1.04;max-width:840px;margin:22px auto 22px;font-weight:500;letter-spacing:-.045em}
+  .hero h1 em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:-.01em;color:var(--acc)}
+  .hero .sub{max-width:520px;margin:0 auto 30px;font-size:17px;text-align:center;color:var(--muted)}
+  .cta{display:flex;gap:14px;justify-content:center;align-items:center}
+  .textlink{font-size:14px;color:#c6c5ca;cursor:pointer;display:inline-flex;gap:6px;align-items:center}.textlink:hover{color:#fff}
+  .trusted{margin-top:42px;font-family:var(--mono);font-size:11.5px;color:var(--muted2);display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+  .trusted b{color:var(--muted)}
 
-  .marq{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);padding:30px 0}
-  .marq .track{display:flex;gap:10px;width:max-content;animation:scroll 28s linear infinite}
-  @keyframes scroll{to{transform:translateX(-50%)}}
-  .surf{font-family:var(--mono);font-size:12.5px;border:1px solid var(--border);border-radius:9px;padding:9px 13px;color:#bdbac3;background:#0e0e11;white-space:nowrap}
+  /* BENTO */
+  .bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:152px;gap:14px;margin:62px 0 20px}
+  .tile{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px;position:relative;overflow:hidden;transition:.18s;display:flex;flex-direction:column}
+  .tile:hover{border-color:var(--border-hi);transform:translateY(-2px);background:var(--hi)}
+  .tile .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--muted2);text-transform:uppercase}
+  .tile .t{font-family:var(--disp);font-size:16px;font-weight:600;letter-spacing:-.02em;margin-top:auto}
+  .tile .d{font-size:12.5px;color:var(--muted);line-height:1.5;margin-top:5px}
+  .t-demo{grid-column:span 2;grid-row:span 2}
+  .t-wide{grid-column:span 2}
+  .glassbar{position:absolute;inset:0;background:radial-gradient(380px 160px at 80% 0%,rgba(74,222,128,.08),transparent)}
 
-  .band{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2);margin:70px 0;padding:34px 0}
-  .stats{display:flex;justify-content:space-around;flex-wrap:wrap;gap:24px;text-align:center}
-  .stats .s .n{font-family:var(--disp);font-size:30px;font-weight:600;letter-spacing:-.02em}
-  .stats .s .l{font-family:var(--mono);font-size:11px;color:var(--muted2);margin-top:4px;letter-spacing:.04em}
-  .sect{padding:54px 0}
-  .center{text-align:center;max-width:560px;margin:0 auto 36px}
-  .center .sub{margin:10px auto 0}
+  /* mini chatgpt mock inside demo tile */
+  .mock{background:#0b0b0b;border:1px solid #1d1d1d;border-radius:12px;padding:16px;flex:1;display:flex;flex-direction:column;gap:0}
+  .mock .u{margin-left:auto;max-width:80%;background:#262628;border-radius:13px;padding:8px 12px;font-size:12.5px}
+  .mock .think{color:#8a8a8a;font-size:12.5px;margin-top:16px;display:none}.mock .think::before{content:"✶ ";color:var(--acc)}
+  .mock .think.show{display:block}
+  .mock .ans{color:#e6e6e6;font-size:12.5px;margin-top:16px;display:none;line-height:1.5}.mock .ans.show{display:block}
+  .mockad{display:none;margin-top:9px;background:rgba(18,18,22,.96);border:1px solid rgba(74,222,128,.25);border-radius:30px;padding:7px 13px;font-size:11.5px;width:fit-content}
+  .mockad .s{font-family:var(--mono);font-size:9px;color:var(--acc);margin-right:6px}
+  .mockad.show{display:flex;align-items:center}
+  .ticker{font-family:var(--disp);font-size:40px;font-weight:600;letter-spacing:-.03em;line-height:1}
+  .ring{--p:40;width:54px;height:54px;border-radius:50%;flex:none;background:conic-gradient(var(--acc) calc(var(--p)*1%),#1d1f23 0);display:grid;place-items:center}
+  .ring span{width:40px;height:40px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-weight:600;font-size:13px;font-family:var(--disp)}
+  .minichips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .minichips .c{font-family:var(--mono);font-size:10.5px;border:1px solid var(--border-hi);border-radius:20px;padding:3px 9px;color:#bdbcc3}
+  .minichips .c.on{background:var(--acc-soft);border-color:rgba(74,222,128,.4);color:var(--acc)}
+  .codeln{font-family:var(--mono);font-size:11px;color:#8fe7b1;line-height:1.6;margin-top:8px}
 
-  .gpt{background:#0c0c0c;border:1px solid #222;border-radius:16px;padding:24px;max-width:560px;margin:0 auto;min-height:300px}
-  .gpt .u{margin-left:auto;max-width:78%;background:#2a2a2c;border-radius:16px;padding:11px 15px;font-size:13.5px}
-  .gpt .think{color:#8f8f8f;font-size:13.5px;margin-top:26px;display:none}
-  .gpt .think::before{content:"✶ ";color:var(--acid)}
-  .gpt .think.show{display:block}
-  .gpt .ans{color:#e8e8e8;font-size:13.5px;margin-top:26px;display:none;line-height:1.55}
-  .gpt .ans.show{display:block}
-  .ungad{display:none;margin-top:11px;background:rgba(20,20,24,.95);color:var(--text);font-size:12.5px;border:1px solid rgba(94,242,160,.25);border-radius:30px;padding:8px 15px;width:fit-content;box-shadow:0 4px 20px rgba(0,0,0,.5);cursor:pointer}
-  .ungad .s{font-family:var(--mono);font-size:10px;color:var(--acid);margin-right:7px}
-  .ungad.show{display:flex;align-items:center}
-
-  .ring{--p:40;width:66px;height:66px;border-radius:50%;flex:none;background:conic-gradient(var(--acid) calc(var(--p)*1%),#1f1f25 0);display:grid;place-items:center}
-  .ring span{width:50px;height:50px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-weight:600;font-size:15px;font-family:var(--disp)}
-  .lbl-ring{display:flex;align-items:center;gap:16px}
-  .preview-wrap{background:#0c0c0c;border:1px dashed #2e2e36;border-radius:12px;padding:20px;margin-top:8px;display:flex;justify-content:center}
-  pre{background:#0b0b0e;border:1px solid var(--border);border-radius:10px;padding:13px;font-size:11.5px;color:#9fe9c0;overflow:auto;margin:10px 0 0;font-family:var(--mono);line-height:1.5}
+  .sect{padding:54px 0}.center{text-align:center;max-width:560px;margin:0 auto 34px}
+  h2{font-family:var(--disp);font-size:30px;margin:0 0 12px;letter-spacing:-.03em;font-weight:500;text-align:center}
+  h2 em{font-family:var(--serif);font-style:italic;color:var(--acc);font-weight:400}
+  .center .sub{margin:8px auto 0}
+  .step{font-family:var(--serif);font-style:italic;font-size:30px;color:var(--acc)}
+  .ctaband{text-align:center;padding:80px 30px;margin-top:40px;border-top:1px solid var(--border);background:radial-gradient(640px 220px at 50% 0%,rgba(74,222,128,.07),transparent)}
   .page-head{padding:46px 0 8px}
-
-  /* CTA band + footer */
-  .ctaband{text-align:center;padding:70px 28px;margin-top:30px;border-top:1px solid var(--border);
-    background:radial-gradient(600px 200px at 50% 0%,rgba(94,242,160,.08),transparent)}
-  footer{border-top:1px solid var(--border);background:#0b0b0d;padding:46px 0 30px}
-  .foot{max-width:1140px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px}
+  .gpt{background:#0b0b0b;border:1px solid #1d1d1d;border-radius:16px;padding:22px;max-width:540px;margin:0 auto;min-height:280px}
+  .gpt .u{margin-left:auto;max-width:78%;background:#262628;border-radius:15px;padding:10px 14px;font-size:13px}
+  .gpt .think{color:#8a8a8a;font-size:13px;margin-top:24px;display:none}.gpt .think::before{content:"✶ ";color:var(--acc)}.gpt .think.show{display:block}
+  .gpt .ans{color:#e6e6e6;font-size:13px;margin-top:24px;display:none;line-height:1.5}.gpt .ans.show{display:block}
+  .mockad.lg{font-size:12.5px;padding:8px 15px;margin-top:11px}
+  .lbl-ring{display:flex;align-items:center;gap:16px}
+  .preview-wrap{background:#0b0b0b;border:1px dashed #2a2a2a;border-radius:12px;padding:18px;margin-top:8px;display:flex;justify-content:center}
+  pre{background:#0a0b0d;border:1px solid var(--border);border-radius:10px;padding:13px;font-size:11.5px;color:#8fe7b1;overflow:auto;margin:10px 0 0;font-family:var(--mono);line-height:1.5}
+  footer{border-top:1px solid var(--border);background:var(--soft);padding:46px 0 28px;margin-top:10px}
+  .foot{max-width:1160px;margin:0 auto;padding:0 30px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px}
   .foot .col{display:flex;flex-direction:column;gap:9px}
-  .foot .col b{font-family:var(--mono);font-size:11px;color:var(--muted2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
-  .foot .col a{font-size:13px;color:#bdbac3;cursor:pointer}
-  .foot .col a:hover{color:#fff}
-  .foot-btm{max-width:1140px;margin:26px auto 0;padding:18px 28px 0;border-top:1px solid var(--border);
-    display:flex;justify-content:space-between;font-size:12px;color:var(--muted2);font-family:var(--mono)}
-  .banner{background:#0c0c0f;border-bottom:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--muted2);text-align:center;padding:6px}
+  .foot .col b{font-family:var(--mono);font-size:10.5px;color:var(--muted2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+  .foot .col a{font-size:13px;color:#bdbcc3;cursor:pointer}.foot .col a:hover{color:#fff}
+  .foot-btm{max-width:1160px;margin:26px auto 0;padding:18px 30px 0;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:12px;color:var(--muted2);font-family:var(--mono)}
+  .banner{background:var(--soft);border-bottom:1px solid var(--border);font-family:var(--mono);font-size:11px;color:var(--muted2);text-align:center;padding:6px}
 </style>
 </head>
 <body>
 <div class="banner">◆ ungate — clickable prototype · mock data · not wired to the live backend</div>
+<svg width="0" height="0" style="position:absolute"><symbol id="gate" viewBox="0 0 24 24"><g fill="none" stroke="#06230f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20V7"/><path d="M13 20V5"/><path d="M9 11h12"/><path d="M17 7l4 4-4 4"/></g></symbol></svg>
 
-<svg width="0" height="0" style="position:absolute"><symbol id="gate" viewBox="0 0 24 24">
-  <g fill="none" stroke="#07210f" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M5 20V7"/><path d="M13 20V5"/><path d="M9 11h12"/><path d="M17 7l4 4-4 4"/>
-  </g></symbol></svg>
-
-<!-- TOP NAV -->
 <header class="nav"><div class="nav-in">
   <div class="brand" data-go="home"><div class="mark"><svg><use href="#gate"/></svg></div><div class="word">ungate</div></div>
   <nav class="links">
     <a data-go="how">How it works</a>
     <a data-go="demo">What you see</a>
     <div class="drop"><span class="dt">For earners ▾</span><div class="menu">
-      <a data-go="login"><span class="mi"></span>Sign in</a>
-      <a data-go="connect"><span class="mi"></span>Connect extension</a>
-      <a data-go="earn"><span class="mi"></span>Earnings dashboard</a>
-    </div></div>
+      <a data-go="login"><span class="mi"></span>Sign in</a><a data-go="connect"><span class="mi"></span>Connect extension</a><a data-go="earn"><span class="mi"></span>Earnings dashboard</a></div></div>
     <div class="drop"><span class="dt">For advertisers ▾</span><div class="menu">
-      <a data-go="adv"><span class="mi"></span>Advertiser dashboard</a>
-      <a data-go="create"><span class="mi"></span>Create campaign</a>
-      <a data-go="fund"><span class="mi"></span>Add funds</a>
-    </div></div>
+      <a data-go="adv"><span class="mi"></span>Advertiser dashboard</a><a data-go="create"><span class="mi"></span>Create campaign</a><a data-go="fund"><span class="mi"></span>Add funds</a></div></div>
   </nav>
-  <div class="navcta">
-    <span class="signin" data-go="login">Sign in</span>
-    <button class="btn" data-go="login">Get started</button>
-  </div>
+  <div class="navcta"><span class="signin" data-go="login">Sign in</span><button class="btn" data-go="login">Get started</button></div>
 </div></header>
 
 <main>
-
   <!-- HOME -->
-  <section class="page active" id="home">
+  <section class="page active" id="home"><div class="container">
     <div class="hero">
-      <div class="glow a"></div><div class="glow b"></div>
-      <div class="container">
-        <div class="tag"><span class="pulse"></span>One account · earn and advertise</div>
-        <h1>Get paid for the attention you<br>already give <span class="grad-txt">AI while it waits.</span></h1>
-        <p class="sub">Ungate sells the quiet moment you spend staring at a loading screen — and pays you half of it, in USDC. Advertisers reach you there; agents bid for it autonomously.</p>
-        <div class="cta">
-          <button class="btn" data-go="login">Get started →</button>
-          <button class="btn ghost" data-go="how">How it works</button>
+      <span class="eyebrow"><span class="pulse"></span>USDC ad marketplace for AI wait-time</span>
+      <h1>Get paid for the attention you give AI <em>while it waits.</em></h1>
+      <p class="sub">Ungate turns the seconds you spend watching a loading spinner into income — settled in USDC. Advertisers reach you there; AI agents bid for it autonomously.</p>
+      <div class="cta">
+        <button class="btn" data-go="login">Start earning →</button>
+        <span class="textlink" data-go="how">See how it works ↗</span>
+      </div>
+      <div class="trusted"><span>Live across</span><b>ChatGPT</b><b>Claude</b><b>Cursor</b><b>Claude Code</b><b>v0</b><b>Perplexity</b><span>+8 more</span></div>
+    </div>
+
+    <!-- BENTO: the product, shown -->
+    <div class="bento">
+      <div class="tile t-demo">
+        <div class="k">What a viewer sees</div>
+        <div class="mock" style="margin-top:12px">
+          <div class="u">a plan to grow my startup</div>
+          <div class="think" id="mThink">Thinking…</div>
+          <div class="mockad" id="mAd"><span class="s">SPONSORED</span>Linear — issue tracking that's actually fast ↗</div>
+          <div class="ans" id="mAns">Here's a 6-week growth plan. Start by segmenting your highest-intent users…</div>
         </div>
       </div>
+      <div class="tile t-wide"><div class="glassbar"></div><div class="k">Your cut · live</div><div class="ticker" id="ticker" style="margin-top:auto">$12.4710</div><div class="d">50% of every impression — paid in USDC on Base.</div></div>
+      <div class="tile t-wide"><div class="k">Targeting</div>
+        <div class="minichips"><span class="c on">ChatGPT</span><span class="c on">Pro</span><span class="c on">o3</span><span class="c">Claude</span><span class="c">Free</span></div>
+        <div class="t">Reach exactly who's waiting</div><div class="d">By surface, plan tier, and model.</div></div>
+      <div class="tile t-wide"><div class="k">14 surfaces</div><div class="t" style="margin-top:auto">One line, everywhere AI stalls</div><div class="d">Chat, coding agents, image & video gen, CI.</div></div>
+      <div class="tile"><div class="k">Agents · x402</div><div class="codeln">→ 402 Payment<br>→ pay USDC<br>✓ funded</div><div class="t" style="font-size:14px">Agents self-fund</div></div>
+      <div class="tile"><div class="lbl-ring"><div class="ring" style="--p:40"><span>40</span></div><div class="d" style="margin:0">Trust score lifts your earn rate.</div></div><div class="t" style="font-size:14px">Enhance to earn more</div></div>
     </div>
 
-    <div class="container"><div class="marq"><div class="track" id="marq"></div></div></div>
-
-    <div class="band"><div class="container stats">
-      <div class="s"><div class="n grad-txt">50%</div><div class="l">REVENUE TO YOU</div></div>
-      <div class="s"><div class="n">14</div><div class="l">SURFACES</div></div>
-      <div class="s"><div class="n">USDC</div><div class="l">ON BASE</div></div>
-      <div class="s"><div class="n grad-txt">x402</div><div class="l">AGENT-NATIVE</div></div>
-    </div></div>
-
-    <div class="container sect">
-      <div class="center"><h2>How it works</h2><p class="sub">One loop. Viewers earn, advertisers reach, everything settles in USDC.</p></div>
+    <div class="sect">
+      <div class="center"><h2>How it <em>works</em></h2><p class="sub">One loop. Viewers earn, advertisers reach, everything settles in USDC.</p></div>
       <div class="grid3">
-        <div class="card"><div class="big grad-txt" style="font-size:24px">01</div><b>Wait happens</b><p class="muted" style="font-size:13px;line-height:1.6">AI starts thinking / generating / building. The extension or CLI detects it.</p></div>
-        <div class="card"><div class="big grad-txt" style="font-size:24px">02</div><b>Ad serves</b><p class="muted" style="font-size:13px;line-height:1.6">A targeted one-liner shows under the spinner. Advertiser billed per attention-second.</p></div>
-        <div class="card"><div class="big grad-txt" style="font-size:24px">03</div><b>USDC splits</b><p class="muted" style="font-size:13px;line-height:1.6">50% to you, rest to the platform — tracked live, paid out on Base.</p></div>
+        <div class="card"><div class="step">01</div><b>Wait happens</b><p class="muted" style="font-size:13px;line-height:1.6">AI starts thinking, generating, or building. The extension or CLI detects it.</p></div>
+        <div class="card"><div class="step">02</div><b>Ad serves</b><p class="muted" style="font-size:13px;line-height:1.6">A targeted one-liner appears under the spinner. The advertiser is billed per attention-second.</p></div>
+        <div class="card"><div class="step">03</div><b>USDC splits</b><p class="muted" style="font-size:13px;line-height:1.6">50% to you, the rest to the platform — tracked live, paid out on Base.</p></div>
       </div>
     </div>
 
-    <div class="container sect">
-      <div class="center"><h2>What a viewer sees</h2><p class="sub">One quiet line under "Thinking." It never covers the answer — and vanishes when the response starts.</p></div>
-      <div class="gpt">
-        <div class="u">i need a long-format plan to grow my startup</div>
-        <div class="think" id="dThink">Thinking…</div>
-        <div class="ungad" id="dAd"><span class="s">SPONSORED</span> Linear — issue tracking that's actually fast ↗</div>
-        <div class="ans" id="dAns">Here's a 6-week growth plan. First, segment your highest-intent users…</div>
-      </div>
-    </div>
-
-    <div class="container sect"><div class="grid2">
-      <div class="card"><h3 style="margin-top:0">🪙 Earn</h3><p class="muted" style="font-size:13.5px;line-height:1.65;margin:0 0 14px">Install the extension or CLI. While ChatGPT, Claude, or your coding agent thinks, one sponsored line appears — and you keep <b style="color:var(--text)">50% of the ad revenue</b> in USDC.</p><button class="btn ghost sm" data-go="earn">See the earner dashboard →</button></div>
-      <div class="card"><h3 style="margin-top:0">📣 Advertise</h3><p class="muted" style="font-size:13.5px;line-height:1.65;margin:0 0 14px">Reach people in their most captive moment. Target by surface, plan tier, and model. Fund with USDC — wallet, card, or <b style="color:var(--text)">x402 for AI agents</b>.</p><button class="btn ghost sm" data-go="adv">See the advertiser dashboard →</button></div>
+    <div class="sect"><div class="grid2">
+      <div class="card" style="padding:24px"><h3 style="margin-top:0;font-size:17px">🪙 For earners</h3><p class="muted" style="font-size:13.5px;line-height:1.65;margin:0 0 16px">Install once. Keep <b style="color:var(--text)">50% of the ad revenue</b> from every AI wait, in USDC. Connect socials & a wallet to earn more.</p><button class="btn ghost sm" data-go="earn">See the earner dashboard →</button></div>
+      <div class="card" style="padding:24px"><h3 style="margin-top:0;font-size:17px">📣 For advertisers</h3><p class="muted" style="font-size:13.5px;line-height:1.65;margin:0 0 16px">Reach people in their most captive moment. Target precisely. Fund with USDC — wallet, card, or <b style="color:var(--text)">x402 for AI agents</b>.</p><button class="btn ghost sm" data-go="adv">See the advertiser dashboard →</button></div>
     </div></div>
 
     <div class="ctaband">
-      <h2>Start earning in two minutes.</h2>
-      <p class="sub" style="margin:10px auto 22px;text-align:center">One account works on both sides of the marketplace.</p>
+      <span class="eyebrow"><span class="pulse"></span>One account · both sides</span>
+      <h2 style="margin:18px 0 10px">Start earning in <em>two minutes.</em></h2>
+      <p class="sub" style="margin:0 auto 22px;text-align:center">No surveys. No crypto knowledge. Just keep using AI.</p>
       <button class="btn" data-go="login">Get started →</button>
     </div>
-  </section>
+  </div></section>
 
   <!-- HOW -->
   <section class="page" id="how"><div class="container app">
     <div class="page-head"><h1>How it works</h1><p class="sub">One loop. Viewers earn, advertisers reach, everything settles in USDC.</p></div>
     <div class="grid3">
-      <div class="card"><div class="big grad-txt" style="font-size:24px">01</div><b>Wait happens</b><p class="muted" style="font-size:13px;line-height:1.6">AI starts thinking / generating / building. The extension or CLI detects it.</p></div>
-      <div class="card"><div class="big grad-txt" style="font-size:24px">02</div><b>Ad serves</b><p class="muted" style="font-size:13px;line-height:1.6">A targeted one-liner shows under the spinner. Advertiser billed per attention-second.</p></div>
-      <div class="card"><div class="big grad-txt" style="font-size:24px">03</div><b>USDC splits</b><p class="muted" style="font-size:13px;line-height:1.6">50% to you, rest to the platform — tracked live, paid out on Base.</p></div>
+      <div class="card"><div class="step">01</div><b>Wait happens</b><p class="muted" style="font-size:13px;line-height:1.6">AI starts thinking / generating / building. The extension or CLI detects it.</p></div>
+      <div class="card"><div class="step">02</div><b>Ad serves</b><p class="muted" style="font-size:13px;line-height:1.6">A targeted one-liner shows under the spinner. Advertiser billed per attention-second.</p></div>
+      <div class="card"><div class="step">03</div><b>USDC splits</b><p class="muted" style="font-size:13px;line-height:1.6">50% to you, rest to the platform — tracked live, paid out on Base.</p></div>
     </div>
     <h3>The money rails</h3>
     <div class="card">
       <div class="row"><span class="muted">Advertiser pays</span><b class="mono">per 1,000 impressions · clicks 50×</b></div>
-      <div class="row" style="margin-top:14px"><span class="muted">You earn</span><b class="grad-txt mono">50% of every impression</b></div>
+      <div class="row" style="margin-top:14px"><span class="muted">You earn</span><b class="mono acc">50% of every impression</b></div>
       <div class="row" style="margin-top:14px"><span class="muted">Settlement</span><b class="mono">USDC on Base</b></div>
       <div class="row" style="margin-top:14px"><span class="muted">Anti-abuse</span><b class="mono">1 human ↔ installs · attention gate · trust score</b></div>
     </div>
@@ -252,11 +234,11 @@
 
   <!-- DEMO -->
   <section class="page" id="demo"><div class="container app">
-    <div class="page-head"><h1>What a viewer sees</h1><p class="sub">The whole product from their side: one quiet line under "Thinking." It sits below the reasoning and vanishes when the response starts.</p></div>
+    <div class="page-head"><h1>What a viewer sees</h1><p class="sub">One quiet line under "Thinking." It sits below the reasoning and vanishes when the answer starts — it never covers content.</p></div>
     <div class="gpt">
       <div class="u">i need a long-format plan to grow my startup</div>
       <div class="think" id="dThink2">Thinking…</div>
-      <div class="ungad" id="dAd2"><span class="s">SPONSORED</span> Linear — issue tracking that's actually fast ↗</div>
+      <div class="mockad lg" id="dAd2"><span class="s">SPONSORED</span> Linear — issue tracking that's actually fast ↗</div>
       <div class="ans" id="dAns2">Here's a 6-week growth plan. First, segment your highest-intent users…</div>
     </div>
   </div></section>
@@ -264,100 +246,62 @@
   <!-- LOGIN -->
   <section class="page" id="login"><div class="container app">
     <div class="page-head"><h1>Sign in</h1><p class="sub">One account for earning and advertising. Email code — no password.</p></div>
-    <div class="card" style="max-width:390px">
-      <label>EMAIL</label><input value="you@example.com">
-      <button class="btn" style="width:100%;justify-content:center;margin-top:16px" id="sendCode">Send code →</button>
-    </div>
-    <div class="card" id="otp" style="max-width:390px;margin-top:16px;display:none">
-      <label>ENTER THE 6-DIGIT CODE</label>
-      <div style="display:flex;gap:8px">
-        <input class="mono" style="text-align:center" value="3"><input class="mono" style="text-align:center" value="9"><input class="mono" style="text-align:center" value="1"><input class="mono" style="text-align:center" value="0"><input class="mono" style="text-align:center" value="4"><input class="mono" style="text-align:center" value="2">
-      </div>
-      <button class="btn" style="width:100%;justify-content:center;margin-top:16px" data-go="connect">Verify →</button>
-    </div>
+    <div class="card" style="max-width:380px"><label>EMAIL</label><input value="you@example.com"><button class="btn" style="width:100%;justify-content:center;margin-top:16px" id="sendCode">Send code →</button></div>
+    <div class="card" id="otp" style="max-width:380px;margin-top:14px;display:none"><label>ENTER THE 6-DIGIT CODE</label>
+      <div style="display:flex;gap:8px"><input class="mono" style="text-align:center" value="3"><input class="mono" style="text-align:center" value="9"><input class="mono" style="text-align:center" value="1"><input class="mono" style="text-align:center" value="0"><input class="mono" style="text-align:center" value="4"><input class="mono" style="text-align:center" value="2"></div>
+      <button class="btn" style="width:100%;justify-content:center;margin-top:16px" data-go="connect">Verify →</button></div>
   </div></section>
 
   <!-- CONNECT -->
   <section class="page" id="connect"><div class="container app">
-    <div class="card" style="max-width:450px;margin:46px auto;text-align:center">
+    <div class="card" style="max-width:440px;margin:46px auto;text-align:center">
       <div class="mark" style="width:46px;height:46px;margin:0 auto 8px"><svg style="width:28px;height:28px"><use href="#gate"/></svg></div>
-      <h1 style="font-size:22px">Extension connected</h1>
-      <p class="sub" style="margin:8px auto 18px">You'll now earn USDC on this device whenever AI keeps you waiting.</p>
-      <div class="mono muted" style="font-size:11px;background:#0b0b0e;border:1px solid var(--border);border-radius:9px;padding:9px">install · 4a1cf286-82df-49d0-b29f-67b08fef6124</div>
+      <h1 style="font-size:21px">Extension connected</h1>
+      <p class="sub" style="margin:8px auto 16px">You'll now earn USDC on this device whenever AI keeps you waiting.</p>
+      <div class="mono muted" style="font-size:11px;background:#0a0b0d;border:1px solid var(--border);border-radius:9px;padding:9px">install · 4a1cf286-82df-49d0-b29f-67b08fef6124</div>
       <button class="btn" style="margin-top:18px" data-go="earn">Go to dashboard →</button>
     </div>
   </div></section>
 
-  <!-- EARN DASHBOARD -->
+  <!-- EARN -->
   <section class="page" id="earn"><div class="container app">
     <div class="page-head row"><h1 style="margin:0">Your earnings</h1><span class="mono muted" style="font-size:12.5px">tommy_9862 · viewer + advertiser</span></div>
     <div class="grid2">
-      <div class="card">
-        <div class="mono muted" style="font-size:12px">EARNER BALANCE</div>
-        <div class="big">$12.47 <span class="usdc">USDC</span></div>
-        <div class="mono muted" style="font-size:12px;margin-top:4px">+ $0.31 today · 3,118 impressions</div>
+      <div class="card"><div class="mono muted" style="font-size:11px">EARNER BALANCE</div><div class="big">$12.47 <span class="usdc">USDC</span></div><div class="mono muted" style="font-size:12px;margin-top:4px">+ $0.31 today · 3,118 impressions</div>
         <div style="display:flex;gap:8px;margin-top:16px"><input value="10.00" style="width:120px"><button class="btn">Withdraw</button></div>
-        <div class="mono muted" style="font-size:11px;margin-top:8px">→ 0x1aE8…01F8 · min $1 · batched on Base</div>
-      </div>
-      <div class="card">
-        <div class="mono muted" style="font-size:12px;margin-bottom:14px">ENHANCE YOUR ACCOUNT — EARN MORE</div>
-        <div class="lbl-ring"><div class="ring" style="--p:40"><span>40</span></div><div class="muted" style="font-size:12.5px;line-height:1.5">Trust score raises your earn multiplier and unlocks higher withdrawal limits.</div></div>
-        <div style="margin-top:14px">
-          <div class="ck done"><div class="dot">✓</div> Connect X <span class="pts">+15</span></div>
-          <div class="ck done"><div class="dot">✓</div> Add payout wallet <span class="pts">+25</span></div>
-          <div class="ck"><div class="dot"></div> Connect Google <span class="pts">+15</span></div>
-          <div class="ck"><div class="dot"></div> Connect Discord <span class="pts">+15</span></div>
-          <div class="ck"><div class="dot"></div> Verify identity (KYC) <span class="pts">soon</span></div>
-        </div>
-      </div>
+        <div class="mono muted" style="font-size:11px;margin-top:8px">→ 0x1aE8…01F8 · min $1 · batched on Base</div></div>
+      <div class="card"><div class="mono muted" style="font-size:11px;margin-bottom:14px">ENHANCE YOUR ACCOUNT — EARN MORE</div>
+        <div class="lbl-ring"><div class="ring" style="--p:40;width:64px;height:64px"><span style="width:48px;height:48px;font-size:15px">40</span></div><div class="muted" style="font-size:12.5px;line-height:1.5">Trust score raises your earn multiplier and unlocks higher withdrawal limits.</div></div>
+        <div style="margin-top:14px"><div class="ck done"><div class="dot">✓</div> Connect X <span class="pts">+15</span></div><div class="ck done"><div class="dot">✓</div> Add payout wallet <span class="pts">+25</span></div><div class="ck"><div class="dot"></div> Connect Google <span class="pts">+15</span></div><div class="ck"><div class="dot"></div> Connect Discord <span class="pts">+15</span></div><div class="ck"><div class="dot"></div> Verify identity (KYC) <span class="pts">soon</span></div></div></div>
     </div>
     <h3>Connected devices</h3>
-    <div class="card" style="padding:6px 22px">
-      <div class="ck done" style="border:none"><div class="dot">✓</div> Chrome · macOS <span class="pts">active now</span></div>
-      <div class="ck done" style="border:none"><div class="dot">✓</div> Claude Code (CLI) · pro · opus <span class="pts">2m ago</span></div>
-    </div>
+    <div class="card" style="padding:6px 20px"><div class="ck done" style="border:none"><div class="dot">✓</div> Chrome · macOS <span class="pts">active now</span></div><div class="ck done" style="border:none"><div class="dot">✓</div> Claude Code (CLI) · pro · opus <span class="pts">2m ago</span></div></div>
   </div></section>
 
-  <!-- ADVERTISER DASHBOARD -->
+  <!-- ADV -->
   <section class="page" id="adv"><div class="container app">
     <div class="page-head row"><h1 style="margin:0">Campaigns</h1><button class="btn" data-go="create">+ New campaign</button></div>
     <div class="grid3">
-      <div class="card"><div class="mono muted" style="font-size:11px">ADVERTISER BALANCE</div><div class="big" style="font-size:28px">$430.00 <span class="usdc">USDC</span></div><button class="btn ghost sm" style="margin-top:10px" data-go="fund">Add funds</button></div>
-      <div class="card"><div class="mono muted" style="font-size:11px">IMPRESSIONS · 7D</div><div class="big" style="font-size:28px">214,907</div><div class="mono muted" style="font-size:12px;margin-top:4px">across 6 surfaces</div></div>
-      <div class="card"><div class="mono muted" style="font-size:11px">SPEND · 7D</div><div class="big" style="font-size:28px">$612.40</div><div class="mono muted" style="font-size:12px;margin-top:4px">avg CTR 1.8%</div></div>
+      <div class="card"><div class="mono muted" style="font-size:11px">ADVERTISER BALANCE</div><div class="big" style="font-size:26px">$430.00 <span class="usdc">USDC</span></div><button class="btn ghost sm" style="margin-top:10px" data-go="fund">Add funds</button></div>
+      <div class="card"><div class="mono muted" style="font-size:11px">IMPRESSIONS · 7D</div><div class="big" style="font-size:26px">214,907</div><div class="mono muted" style="font-size:12px;margin-top:4px">across 6 surfaces</div></div>
+      <div class="card"><div class="mono muted" style="font-size:11px">SPEND · 7D</div><div class="big" style="font-size:26px">$612.40</div><div class="mono muted" style="font-size:12px;margin-top:4px">avg CTR 1.8%</div></div>
     </div>
     <h3>Active campaigns</h3>
-    <div class="card" style="padding:18px 22px">
-      <table>
-        <tr><th>Campaign</th><th>Status</th><th>Bid CPM</th><th>Targeting</th><th>Spent / Budget</th><th>Impr.</th><th>Clicks</th></tr>
-        <tr><td>Premium DevTool</td><td><span class="pill on">active</span></td><td class="mono">$12.00</td><td class="mono" style="font-size:12px">chatgpt · pro · o3</td><td class="mono">$284 / $500</td><td class="mono">23,704</td><td class="mono">612</td></tr>
-        <tr><td>Base USDC</td><td><span class="pill on">active</span></td><td class="mono">$3.00</td><td class="mono" style="font-size:12px">all surfaces</td><td class="mono">$190 / $250</td><td class="mono">63,400</td><td class="mono">980</td></tr>
-        <tr><td>Linear</td><td><span class="pill on">active</span></td><td class="mono">$4.00</td><td class="mono" style="font-size:12px">all surfaces</td><td class="mono">$138 / $250</td><td class="mono">34,612</td><td class="mono">1,204</td></tr>
-        <tr><td>Tail Trade</td><td><span class="pill off">paused</span></td><td class="mono">$2.00</td><td class="mono" style="font-size:12px">claude · perplexity</td><td class="mono">$0 / $250</td><td class="mono">0</td><td class="mono">0</td></tr>
-      </table>
-    </div>
+    <div class="card" style="padding:16px 20px"><table>
+      <tr><th>Campaign</th><th>Status</th><th>Bid CPM</th><th>Targeting</th><th>Spent / Budget</th><th>Impr.</th><th>Clicks</th></tr>
+      <tr><td>Premium DevTool</td><td><span class="pill on">active</span></td><td class="mono">$12.00</td><td class="mono" style="font-size:12px">chatgpt · pro · o3</td><td class="mono">$284 / $500</td><td class="mono">23,704</td><td class="mono">612</td></tr>
+      <tr><td>Base USDC</td><td><span class="pill on">active</span></td><td class="mono">$3.00</td><td class="mono" style="font-size:12px">all surfaces</td><td class="mono">$190 / $250</td><td class="mono">63,400</td><td class="mono">980</td></tr>
+      <tr><td>Linear</td><td><span class="pill on">active</span></td><td class="mono">$4.00</td><td class="mono" style="font-size:12px">all surfaces</td><td class="mono">$138 / $250</td><td class="mono">34,612</td><td class="mono">1,204</td></tr>
+      <tr><td>Tail Trade</td><td><span class="pill off">paused</span></td><td class="mono">$2.00</td><td class="mono" style="font-size:12px">claude · perplexity</td><td class="mono">$0 / $250</td><td class="mono">0</td><td class="mono">0</td></tr>
+    </table></div>
   </div></section>
 
-  <!-- CREATE CAMPAIGN -->
+  <!-- CREATE -->
   <section class="page" id="create"><div class="container app">
     <div class="page-head"><h1>Create campaign</h1><p class="sub">Highest bid serves first within the audience you target. Clicks bill 50× the impression rate.</p></div>
     <div class="grid2">
-      <div class="card">
-        <label>CAMPAIGN NAME</label><input value="Premium DevTool">
-        <label>AD LINE — 3–60 CHARS</label><input id="cText" maxlength="60" value="You run o3 all day — try the IDE for power users">
-        <label>BRAND NAME · ICON</label><div style="display:flex;gap:8px"><input value="Linear" style="flex:1"><button class="btn ghost sm">Upload icon</button></div>
-        <label>CLICK DESTINATION</label><input value="https://linear.app">
-        <div style="display:flex;gap:12px"><div style="flex:1"><label>BID · USDC / 1K</label><input class="mono" value="12.00"></div><div style="flex:1"><label>BUDGET · USDC</label><input class="mono" value="500"></div></div>
-      </div>
-      <div class="card">
-        <label>TARGET SURFACE</label>
-        <div style="display:flex;flex-wrap:wrap;gap:8px" data-grp="surface"><div class="chip sel">ChatGPT</div><div class="chip">Claude</div><div class="chip">Gemini</div><div class="chip">Perplexity</div><div class="chip">v0</div><div class="chip">Claude Code</div></div>
-        <label>TARGET PLAN TIER</label><div style="display:flex;gap:8px" data-grp="tier"><div class="chip sel">Pro</div><div class="chip">Free</div></div>
-        <label>MODEL CONTAINS</label><input class="mono" value="o3">
-        <label>LIVE PREVIEW</label>
-        <div class="preview-wrap"><div class="ungad show" style="position:static"><span class="s">SPONSORED</span> <span id="cPrev">You run o3 all day — try the IDE for power users</span></div></div>
-        <button class="btn" style="width:100%;justify-content:center;margin-top:18px" data-go="adv">Launch campaign →</button>
-      </div>
+      <div class="card"><label>CAMPAIGN NAME</label><input value="Premium DevTool"><label>AD LINE — 3–60 CHARS</label><input id="cText" maxlength="60" value="You run o3 all day — try the IDE for power users"><label>BRAND NAME · ICON</label><div style="display:flex;gap:8px"><input value="Linear" style="flex:1"><button class="btn ghost sm">Upload icon</button></div><label>CLICK DESTINATION</label><input value="https://linear.app"><div style="display:flex;gap:12px"><div style="flex:1"><label>BID · USDC / 1K</label><input class="mono" value="12.00"></div><div style="flex:1"><label>BUDGET · USDC</label><input class="mono" value="500"></div></div></div>
+      <div class="card"><label>TARGET SURFACE</label><div style="display:flex;flex-wrap:wrap;gap:8px" data-grp="surface"><div class="chip sel">ChatGPT</div><div class="chip">Claude</div><div class="chip">Gemini</div><div class="chip">Perplexity</div><div class="chip">v0</div><div class="chip">Claude Code</div></div><label>TARGET PLAN TIER</label><div style="display:flex;gap:8px" data-grp="tier"><div class="chip sel">Pro</div><div class="chip">Free</div></div><label>MODEL CONTAINS</label><input class="mono" value="o3"><label>LIVE PREVIEW</label><div class="preview-wrap"><div class="mockad lg show" style="display:flex"><span class="s">SPONSORED</span> <span id="cPrev">You run o3 all day — try the IDE for power users</span></div></div><button class="btn" style="width:100%;justify-content:center;margin-top:18px" data-go="adv">Launch campaign →</button></div>
     </div>
   </div></section>
 
@@ -372,15 +316,11 @@
 ✓ credited 50 USDC</pre></div>
     </div>
   </div></section>
-
 </main>
 
 <footer>
   <div class="foot">
-    <div class="col" style="max-width:240px">
-      <div class="brand" data-go="home" style="margin:0 0 6px"><div class="mark"><svg><use href="#gate"/></svg></div><div class="word">ungate</div></div>
-      <span class="muted" style="font-size:13px;line-height:1.5">Get paid for the attention you already give AI while it waits.</span>
-    </div>
+    <div class="col" style="max-width:230px"><div class="brand" data-go="home" style="margin:0 0 6px"><div class="mark"><svg><use href="#gate"/></svg></div><div class="word">ungate</div></div><span class="muted" style="font-size:13px;line-height:1.5">Get paid for the attention you give AI while it waits.</span></div>
     <div class="col"><b>Product</b><a data-go="how">How it works</a><a data-go="demo">What you see</a><a data-go="login">Get started</a></div>
     <div class="col"><b>Earn</b><a data-go="login">Sign in</a><a data-go="connect">Connect extension</a><a data-go="earn">Earnings dashboard</a></div>
     <div class="col"><b>Advertise</b><a data-go="adv">Dashboard</a><a data-go="create">Create campaign</a><a data-go="fund">Add funds</a></div>
@@ -389,27 +329,17 @@
 </footer>
 
 <script>
-  const surfaces=['ChatGPT','Claude','Gemini','Perplexity','Grok','v0','bolt.new','Replit','Claude Code (CLI)','GitHub Actions','Midjourney','Runway','Cursor','Suno'];
-  document.getElementById('marq').innerHTML=[...surfaces,...surfaces].map(s=>`<div class="surf">${s}</div>`).join('');
   const pages=[...document.querySelectorAll('.page')];
-  function go(id){
-    pages.forEach(p=>p.classList.toggle('active',p.id===id));
-    window.scrollTo(0,0);
-    if(id!=='login'){const o=document.getElementById('otp');if(o)o.style.display='none';}
-  }
+  function go(id){pages.forEach(p=>p.classList.toggle('active',p.id===id));window.scrollTo(0,0);if(id!=='login'){const o=document.getElementById('otp');if(o)o.style.display='none';}}
   document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();go(b.dataset.go);}));
   document.getElementById('sendCode').addEventListener('click',()=>document.getElementById('otp').style.display='block');
-  document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{
-    if(c.parentElement.dataset.grp==='tier')[...c.parentElement.children].forEach(x=>x.classList.remove('sel'));
-    c.classList.toggle('sel');
-  }));
-  const cText=document.getElementById('cText'),cPrev=document.getElementById('cPrev');
-  if(cText)cText.addEventListener('input',()=>cPrev.textContent=cText.value);
-  // demo loops (home + demo page share logic)
-  function loop(t,a,n){if(!t)return;function c(){t.classList.add('show');a.classList.add('show');n.classList.remove('show');
-    setTimeout(()=>{t.classList.remove('show');a.classList.remove('show');n.classList.add('show');},2600);
-    setTimeout(()=>{n.classList.remove('show');},5200);}c();setInterval(c,5600);}
-  loop(document.getElementById('dThink'),document.getElementById('dAd'),document.getElementById('dAns'));
+  document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>{if(c.parentElement.dataset.grp==='tier')[...c.parentElement.children].forEach(x=>x.classList.remove('sel'));c.classList.toggle('sel');}));
+  const cText=document.getElementById('cText'),cPrev=document.getElementById('cPrev');if(cText)cText.addEventListener('input',()=>cPrev.textContent=cText.value);
+  // live earnings ticker
+  let bal=12.4710;setInterval(()=>{bal+=Math.random()*0.0009;const t=document.getElementById('ticker');if(t)t.textContent='$'+bal.toFixed(4);},140);
+  // overlay demo loops
+  function loop(t,a,n){if(!t)return;function c(){t.classList.add('show');a.classList.add('show');n.classList.remove('show');setTimeout(()=>{t.classList.remove('show');a.classList.remove('show');n.classList.add('show');},2500);setTimeout(()=>{n.classList.remove('show');},5000);}c();setInterval(c,5400);}
+  loop(document.getElementById('mThink'),document.getElementById('mAd'),document.getElementById('mAns'));
   loop(document.getElementById('dThink2'),document.getElementById('dAd2'),document.getElementById('dAns2'));
 </script>
 </body>
