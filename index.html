@@ -85,6 +85,20 @@
   .ckbtn.go{background:var(--acc);color:#06230f;border-color:transparent}
   .ckbtn.go:hover{background:#5ce68d}
   .ckbtn:disabled{opacity:.45;cursor:not-allowed}
+  /* points & rewards */
+  .tierbadge{font-family:var(--mono);font-size:11.5px;color:var(--acc);background:var(--acc-soft);border:1px solid rgba(74,222,128,.3);border-radius:30px;padding:5px 12px;white-space:nowrap}
+  .prog{height:8px;background:#1a1c20;border-radius:30px;margin-top:16px;overflow:hidden}
+  .prog .bar{height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:30px}
+  .earnpt{font-size:12px;color:var(--muted);background:var(--soft);border:1px solid var(--border);border-radius:9px;padding:9px 11px}
+  .earnpt span{color:var(--acc);font-family:var(--mono);font-weight:500;margin-right:5px}
+  .lbrow{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #17191d;font-size:13.5px}
+  .lbrow:last-child{border:none}
+  .lbrow .rk{width:28px;font-family:var(--mono);color:var(--muted2);font-size:12px}
+  .lbrow .nm{flex:1;color:#c6c5ca}
+  .lbrow .tg{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .lbrow .lp{font-family:var(--mono);color:var(--acc);width:78px;text-align:right}
+  .lbrow.you{background:var(--acc-soft);margin:0 -20px;padding:11px 20px;border-radius:10px}
+  .lbrow.you .nm{color:#fff}
 
   /* HERO — restrained, editorial */
   .hero{text-align:center;padding:96px 0 18px}
@@ -317,6 +331,32 @@
           <div class="ck"><div class="dot"></div><span class="cklbl">Connect Discord</span><span class="pts">+15</span><button class="ckbtn go">Connect</button></div>
           <div class="ck"><div class="dot"></div><span class="cklbl">Verify identity (KYC)</span><span class="pts">+30</span><button class="ckbtn" disabled>Soon</button></div>
         </div></div>
+    </div>
+    <h3>Points &amp; rewards</h3>
+    <div class="grid2">
+      <div class="card">
+        <div class="row" style="align-items:flex-start"><div><div class="mono muted" style="font-size:11px">POINTS BALANCE</div><div class="big" style="font-size:34px">8,420 <span class="usdc">pts</span></div></div><span class="tierbadge">★ Gold · 1.25× earnings</span></div>
+        <div class="prog"><div class="bar" style="width:68%"></div></div>
+        <div class="mono muted" style="font-size:11px;margin-top:7px">16,580 pts to Platinum — unlocks 1.5× USDC earnings</div>
+        <div style="margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div class="earnpt"><span>＋2</span>per impression</div><div class="earnpt"><span>＋50</span>per click</div>
+          <div class="earnpt"><span>＋500</span>per referral</div><div class="earnpt"><span>＋1k</span>7-day streak</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="mono muted" style="font-size:11px">REFER &amp; EARN</div>
+        <p class="muted" style="font-size:13px;line-height:1.55;margin:8px 0 12px">You and your friend each get <b style="color:var(--text)">500 pts</b>, and you earn <b style="color:var(--text)">10%</b> of their points — forever.</p>
+        <div style="display:flex;gap:8px"><input class="mono" value="ungate.app/r/tommy_9862" readonly><button class="btn sm">Copy</button></div>
+        <div class="row" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)"><span class="muted" style="font-size:12.5px">Invited so far</span><b class="mono">7 friends · +3,500 pts</b></div>
+        <div style="margin-top:14px"><span class="textlink" style="font-size:12.5px">Redeem points for USDC →</span></div>
+      </div>
+    </div>
+    <h3>Leaderboard <span class="mono muted" style="font-size:12px;font-weight:400">· this week</span></h3>
+    <div class="card" style="padding:8px 20px 14px">
+      <div class="lbrow"><span class="rk">1</span><span class="nm">satoshi_dev</span><span class="tg">Diamond</span><span class="lp">142,800</span></div>
+      <div class="lbrow"><span class="rk">2</span><span class="nm">prompt_queen</span><span class="tg">Platinum</span><span class="lp">88,140</span></div>
+      <div class="lbrow"><span class="rk">3</span><span class="nm">vibe_coder</span><span class="tg">Platinum</span><span class="lp">61,002</span></div>
+      <div class="lbrow you"><span class="rk">142</span><span class="nm">tommy_9862 (you)</span><span class="tg">Gold</span><span class="lp">8,420</span></div>
     </div>
     <h3>Connected devices</h3>
     <div class="card" style="padding:6px 20px 16px">
